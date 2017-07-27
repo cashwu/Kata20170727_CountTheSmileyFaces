@@ -54,14 +54,64 @@ namespace Kata20170727_CountTheSmileyFaces
             var actual = kata.CountSmileys(new[] { ";D", ":-(", ":-)", ";~)" });
             Assert.AreEqual(3, actual);
         }
+
+        [TestMethod]
+        public void input_4_smiley_should_4_smileys()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { ":D", ":~)", ";~D", ":)" });
+            Assert.AreEqual(4, actual);
+        }
+
+        [TestMethod]
+        public void input_5_smiley_should_2_smileys()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { ":)", ":(", ":D", ":O", ":;" });
+            Assert.AreEqual(2, actual);
+        }
+
+        [TestMethod]
+        public void input_5_smiley_should_0_smileys()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { ";", ")", ";*", ":$", "8-D" });
+            Assert.AreEqual(0, actual);
+        }
+
+        [TestMethod]
+        public void input_5_smiley_should_3_smileys_RandomTest()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { ")", ";-D", ";-P", ":-)", ";D" });
+            Assert.AreEqual(3, actual);
+        }
+
+        [TestMethod]
+        public void input_6_smiley_should_3_smileys_RandomTest()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { "8(", ":)", "8(", ":~(", ";~)", ";)" });
+            Assert.AreEqual(3, actual);
+        }
+
+        [TestMethod]
+        public void input_6_smiley_should_1_smileys_RandomTest()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { "8-)", ";)", ";~P", "; )", "8(", "8 )" });
+            Assert.AreEqual(1, actual);
+        }
     }
 
     public class Kata
     {
         public int CountSmileys(string[] smileys)
         {
-            var smileyKeys = new[] { ':', ';', '-', '~', ')', 'D' };
-            return smileys.Count(a => a.Trim(smileyKeys).Length == 0);
+            return smileys.Count(smiley => smiley.Trim(':', ';').Length > 0 
+                                    && (smiley.Trim('-', '~').Length == smiley.Length || smiley.Trim('-', '~').Length == 0)
+                                    && smiley.Trim(')', 'D').Length > 0
+                                    && smiley.Trim(':', ';', '-', '~', ')', 'D').Length == 0);
         }
     }
 }
