@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Kata20170727_CountTheSmileyFaces
 {
     [TestClass]
-    public class UnitTest1
+    public class CountSmileysTests
     {
         [TestMethod]
         public void TestMethod1()
