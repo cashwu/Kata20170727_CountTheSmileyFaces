@@ -11,7 +11,7 @@ namespace Kata20170727_CountTheSmileyFaces
         public void input_1_smiley_should_1_smileys()
         {
             var kata = new Kata();
-            var actual = kata.CountSmileys(new[] {":)"});
+            var actual = kata.CountSmileys(new[] { ":)" });
             Assert.AreEqual(1, actual);
         }
 
@@ -22,13 +22,23 @@ namespace Kata20170727_CountTheSmileyFaces
             var actual = kata.CountSmileys(new[] { ":(" });
             Assert.AreEqual(0, actual);
         }
+
+        [TestMethod]
+        public void input_2_smiley_should_2_smileys()
+        {
+            var kata = new Kata();
+            var actual = kata.CountSmileys(new[] { ":)", ":D" });
+            Assert.AreEqual(2, actual);
+        }
     }
 
     public class Kata
     {
         public int CountSmileys(string[] smileys)
         {
-            var result = smileys.Count(a => a.Contains(")"));
+            var smileyKeys = new char[] { ':', ')', 'D' };
+
+            var result = smileys.Count(a => a.ToCharArray().Count(b => smileyKeys.Contains(b)) == a.ToCharArray().Length );
             return result;
         }
     }
