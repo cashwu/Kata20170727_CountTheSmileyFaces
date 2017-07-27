@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170727_CountTheSmileyFaces
@@ -108,10 +109,7 @@ namespace Kata20170727_CountTheSmileyFaces
     {
         public int CountSmileys(string[] smileys)
         {
-            return smileys.Count(smiley => smiley.Trim(':', ';').Length > 0 
-                                    && (smiley.Trim('-', '~').Length == smiley.Length || smiley.Trim('-', '~').Length == 0)
-                                    && smiley.Trim(')', 'D').Length > 0
-                                    && smiley.Trim(':', ';', '-', '~', ')', 'D').Length == 0);
+            return smileys.Count(smiley => Regex.IsMatch(smiley, "[:;][-~]?[)D]"));
         }
     }
 }
