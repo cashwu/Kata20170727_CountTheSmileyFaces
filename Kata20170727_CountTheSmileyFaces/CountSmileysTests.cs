@@ -36,10 +36,8 @@ namespace Kata20170727_CountTheSmileyFaces
     {
         public int CountSmileys(string[] smileys)
         {
-            var smileyKeys = new char[] { ':', ')', 'D' };
-
-            var result = smileys.Count(a => a.ToCharArray().Count(b => smileyKeys.Contains(b)) == a.ToCharArray().Length );
-            return result;
+            var smileyKeys = new[] { ':', ')', 'D' };
+            return smileys.Count(a => a.Trim(smileyKeys).Length == 0);
         }
     }
 }
